@@ -5,8 +5,7 @@ const json = (body, status = 200) =>
   });
 
 function identity(request) {
-  return request.headers.get("cf-access-authenticated-user-email") ||
-    request.headers.get("x-staff-email");
+  return request.headers.get("cf-access-authenticated-user-email");
 }
 
 async function staffFor(request, env) {
