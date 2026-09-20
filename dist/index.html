@@ -40,5 +40,5 @@
   </script>
 <script>
 (()=>{const save=document.getElementById('save'),canvas=document.getElementById('signature');if(!save||!canvas)return;const nativeFetch=window.fetch.bind(window);window.fetch=(input,init={})=>{if(String(input).includes('/api/visits')&&init.body){const body=JSON.parse(init.body);body.signature=canvas.toDataURL('image/png');init.body=JSON.stringify(body)}return nativeFetch(input,init)};const original=save.onclick;save.onclick=async e=>{const data=canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data;if(!data.some(v=>v!==0)){document.getElementById('saved').textContent='La firma del grupo es necesaria para guardar el ingreso.';return}return original(e)}})();
-</script></body>
+</script><script>fetch('/api/me').then(r=>{if(!r.ok){const x=document.getElementById('registro');if(x)x.style.display='none'}}).catch(()=>{const x=document.getElementById('registro');if(x)x.style.display='none'});const p=document.querySelector('.private');if(p)p.href='/admin.html';</script></body>
 </html>
