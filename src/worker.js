@@ -77,6 +77,18 @@ async function api(request, env, url) {
     return json({ ok: true, id }, 201);
   }
 
+  if (url.pathname.startsWith("/api/staff/") && request.method === "PATCH") {
+    if (staff.role !== "owner") return json({ error: "Solo el dueño puede cambiar permisos" }, 403);
+    const targetId = url.pathname.split("/").pop();
+    const body = await request.json();
+    if (!['admin','receptionist'].includes(body.role) || typeof body.active !== 'boolean') {
+      return json({ error: "Rol o estado inválido" }, 400);
+    }
+    await env.DB.prepare("UPDATE staff SET role = ?, active = ? WHERE id = ? AND id <> ?")
+      .bind(body.role, body.active ? 1 : 0, targetId, staff.id).run();
+    return json({ ok: true });
+  }
+
   return json({ error: "Ruta no encontrada" }, 404);
 }
 
