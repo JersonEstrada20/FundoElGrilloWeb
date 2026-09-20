@@ -48,15 +48,12 @@ async function api(request, env, url) {
     }
     const visitId = crypto.randomUUID();
     const statements = [env.DB.prepare(
-      "INSERT INTO visits (id, registered_by, vehicle_plate, notes) VALUES (?, ?, ?, ?)"
-    ).bind(visitId, staff.id, body.vehicle_plate || null, body.notes || null)];
+      "INSERT INTO visits (id, registered_by, vehicle_plate, notes, signature_data) VALUES (?, ?, ?, ?, ?)"
+    ).bind(visitId, staff.id, body.vehicle_plate || null, body.notes || null, body.signature || null)];
     for (const person of body.people) {
-      if (!person.full_name || !person.rut || !person.phone || !person.plate || !person.nationality) {
-        return json({ error: "Todos los campos de las personas son obligatorios" }, 400);
-      }
       statements.push(env.DB.prepare(
         "INSERT INTO visitors (id, visit_id, full_name, rut, phone, plate, nationality) VALUES (?, ?, ?, ?, ?, ?, ?)"
-      ).bind(crypto.randomUUID(), visitId, person.full_name, person.rut, person.phone, person.plate, person.nationality));
+      ).bind(crypto.randomUUID(), visitId, person.full_name || "", person.rut || "", person.phone || "", person.plate || "", person.nationality || ""));
     }
     await env.DB.batch(statements);
     return json({ ok: true, visit_id: visitId }, 201);
