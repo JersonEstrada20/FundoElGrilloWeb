@@ -90,6 +90,9 @@ export default {
       try { return await api(request, env, url); }
       catch (error) { return json({ error: "Error interno", detail: error.message }, 500); }
     }
+    if (url.pathname === "/" || url.pathname === "") {
+      return env.ASSETS.fetch(new Request(new URL("/index.html", request.url), request));
+    }
     return env.ASSETS.fetch(request);
   }
 };
