@@ -1,0 +1,2 @@
+import { json, currentStaff } from '../../_lib/auth.js';
+export async function onRequestPatch({ request, env, params }) { const staff=await currentStaff(request,env); if(!staff||staff.role!=='owner') return json({error:'Solo el dueño puede cambiar permisos'},403); const b=await request.json(); if(!['admin','receptionist'].includes(b.role)||typeof b.active!=='boolean') return json({error:'Rol o estado inválido'},400); await env.DB.prepare('UPDATE staff SET role=?,active=? WHERE id=? AND id<>?').bind(b.role,b.active?1:0,params.id,staff.id).run(); return json({ok:true}); }
