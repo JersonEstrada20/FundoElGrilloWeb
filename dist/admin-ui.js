@@ -8,7 +8,7 @@
     #app>.card,#operations,#operations>.card{scroll-margin-top:75px}
     .admin-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
     .admin-summary .guest{margin:0;text-align:center;padding:14px 8px;border:1px solid var(--line)}
-    .admin-summary b{font-size:25px;color:var(--green)}
+    .admin-summary b{font-size:25px;color:var(--green)}.permission-list{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0;font:13px system-ui,sans-serif}.permission-list label{background:var(--surface2);border-radius:999px;padding:6px 9px}
     @media(max-width:620px){.admin-nav{top:0;overflow-x:auto;flex-wrap:nowrap}.admin-nav a{white-space:nowrap}.admin-summary{grid-template-columns:1fr 1fr}.admin-summary .guest:last-child{grid-column:1/-1}}
   `;
   document.head.appendChild(style);
