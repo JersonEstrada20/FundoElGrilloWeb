@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS staff (
   full_name TEXT NOT NULL,
   email TEXT NOT NULL UNIQUE,
   role TEXT NOT NULL DEFAULT 'receptionist' CHECK (role IN ('owner','admin','receptionist')),
+  pin_hash TEXT,
   active INTEGER NOT NULL DEFAULT 1,
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
@@ -29,3 +30,10 @@ CREATE TABLE IF NOT EXISTS visitors (
 
 CREATE INDEX IF NOT EXISTS idx_visits_created_at ON visits(created_at);
 CREATE INDEX IF NOT EXISTS idx_visitors_rut ON visitors(rut);
+
+CREATE TABLE IF NOT EXISTS sessions (
+  token TEXT PRIMARY KEY,
+  staff_id TEXT NOT NULL REFERENCES staff(id) ON DELETE CASCADE,
+  expires_at TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
