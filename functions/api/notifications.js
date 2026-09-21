@@ -1,0 +1,3 @@
+import { json, currentStaff, manage } from '../_lib/auth.js';
+export async function onRequestGet({env,request}) { const staff=await currentStaff(request,env);if(!manage(staff))return json({error:'Permisos insuficientes'},403);const r=await env.DB.prepare('SELECT * FROM notifications ORDER BY created_at DESC LIMIT 100').all();return json({notifications:r.results}); }
+export async function onRequestPatch({env,request}) { const staff=await currentStaff(request,env);if(!manage(staff))return json({error:'Permisos insuficientes'},403);await env.DB.prepare('UPDATE notifications SET is_read=1').run();return json({ok:true}); }
