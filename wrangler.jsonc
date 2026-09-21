@@ -11,7 +11,7 @@
     {
       "binding": "DB",
       "database_name": "fundo-el-grillo-db",
-      "database_id": "PENDIENTE_CLOUDFLARE"
+      "database_id": "78d5186a-f708-40d3-b933-4a0f621ffecc"
     }
   ],
   "r2_buckets": [
