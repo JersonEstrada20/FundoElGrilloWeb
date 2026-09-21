@@ -28,6 +28,7 @@
   });
   const back=app.querySelector('.back');
   if(back)back.after(nav);
+  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>document.getElementById(a.hash.slice(1))?.scrollIntoView({behavior:'smooth',block:'start'}),120)));
   const session=document.getElementById('session');
   if(session&&!session.dataset.kicker){const p=document.createElement('p');p.className='section-kicker';p.textContent='Recepción';session.before(p);session.dataset.kicker='1'}
   const visits=document.getElementById('visits');
