@@ -5,7 +5,7 @@
       const me=await json('/api/me');
       const app=document.getElementById('app');if(!app||app.hidden)return;
       const owner=['owner','admin'].includes(me.staff.role);
-      if(owner){const manage=document.getElementById('manage');if(manage)manage.hidden=false;const operations=document.getElementById('operations');if(operations)operations.hidden=false}
+      if(owner){const manage=document.getElementById('manage');if(manage)manage.hidden=false;const operations=document.getElementById('operations');if(operations)operations.hidden=false}window.dispatchEvent(new Event('admin-ready'));
       document.querySelectorAll('.admin-nav a').forEach(a=>a.onclick=ev=>{ev.preventDefault();const target=document.getElementById(a.hash.slice(1));if(target){target.hidden=false;target.scrollIntoView({behavior:'smooth',block:'start'})}});
       const visits=document.getElementById('visits');
       if(visits&&visits.textContent.includes('Cargando')){
