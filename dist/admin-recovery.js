@@ -6,6 +6,7 @@
       const app=document.getElementById('app');if(!app||app.hidden)return;
       const owner=['owner','admin'].includes(me.staff.role);
       if(owner){const manage=document.getElementById('manage');if(manage)manage.hidden=false;const operations=document.getElementById('operations');if(operations)operations.hidden=false}
+      document.querySelectorAll('.admin-nav a').forEach(a=>a.onclick=ev=>{ev.preventDefault();const target=document.getElementById(a.hash.slice(1));if(target){target.hidden=false;target.scrollIntoView({behavior:'smooth',block:'start'})}});
       const visits=document.getElementById('visits');
       if(visits&&visits.textContent.includes('Cargando')){
         try{const data=await json('/api/visits?limit=200');if(typeof window.renderVisits==='function')window.renderVisits(data);else visits.innerHTML='<p class="message">'+(data.visits?.length||0)+' ingresos registrados.</p>'}catch{visits.innerHTML='<p class="message">No hay ingresos registrados todavía.</p>'}
