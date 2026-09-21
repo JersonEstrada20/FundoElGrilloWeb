@@ -1,0 +1,2 @@
+import { json, currentStaff, manage } from '../_lib/auth.js';
+export async function onRequestGet({env,request}){const staff=await currentStaff(request,env);if(!manage(staff))return json({error:'Permisos insuficientes'},403);const r=await env.DB.prepare('SELECT a.*,s.full_name FROM audit_log a LEFT JOIN staff s ON s.id=a.staff_id ORDER BY a.created_at DESC LIMIT 100').all();return json({events:r.results});}
