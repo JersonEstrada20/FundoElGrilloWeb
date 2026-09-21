@@ -30,4 +30,10 @@
   if(back)back.after(nav);
   const session=document.getElementById('session');
   if(session&&!session.dataset.kicker){const p=document.createElement('p');p.className='section-kicker';p.textContent='Recepción';session.before(p);session.dataset.kicker='1'}
+  const visits=document.getElementById('visits');
+  if(visits){
+    const bar=document.createElement('div');bar.className='admin-filter';bar.innerHTML='<input id="visitSearch" placeholder="Buscar por nombre, RUT, teléfono o patente"><input id="visitDate" type="date">';visits.before(bar);
+    const filter=()=>{const q=(document.getElementById('visitSearch').value||'').toLowerCase(),date=document.getElementById('visitDate').value;visits.querySelectorAll('.visit').forEach(v=>{const text=v.textContent.toLowerCase(),created=v.dataset.date||'';v.hidden=!!(q&&!text.includes(q)||date&&!created.startsWith(date))})};bar.querySelectorAll('input').forEach(x=>x.oninput=filter)
+  }
+  const css=document.createElement('style');css.textContent='.admin-filter{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin:12px 0}.admin-filter input{font:14px system-ui,sans-serif}.status{display:inline-block;border-radius:999px;padding:4px 9px;font:700 11px system-ui,sans-serif;text-transform:uppercase}.status-pending{background:#f5dfb7;color:#76521d}.status-confirmed{background:#cde6d2;color:#245b36}.status-cancelled,.status-rejected{background:#f4d1d1;color:#7d2929}@media(max-width:620px){.admin-filter{grid-template-columns:1fr}}';document.head.appendChild(css);
 })();
