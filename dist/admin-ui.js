@@ -5,7 +5,7 @@
     .admin-nav a{font:600 13px system-ui,sans-serif;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 12px}
     .admin-nav a:hover{border-color:var(--green);color:var(--green)}
     .section-kicker{font:700 11px system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin:0 0 6px}
-    #app>.card,#operations>.card{scroll-margin-top:75px}
+    #app>.card,#operations,#operations>.card{scroll-margin-top:75px}
     .admin-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
     .admin-summary .guest{margin:0;text-align:center;padding:14px 8px;border:1px solid var(--line)}
     .admin-summary b{font-size:25px;color:var(--green)}
