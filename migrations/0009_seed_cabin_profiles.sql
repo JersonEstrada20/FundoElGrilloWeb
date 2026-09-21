@@ -1,0 +1,26 @@
+INSERT OR IGNORE INTO cabin_profiles
+  (slug, display_name, low_price, high_price, guests, bedrooms, pool_type, active)
+VALUES
+  ('boldo','Boldo',90000,110000,6,2,'compartida',1),
+  ('capilla','Capilla',75000,95000,3,1,'propia',1),
+  ('arrayan','Casa Arrayán',120000,140000,8,3,'propia',1),
+  ('barro','Casa de Barro',130000,150000,10,4,'propia',1),
+  ('cerro','Casa del Cerro',80000,100000,4,1,'propia',1),
+  ('chincol','Chincol',65000,85000,2,1,'compartida',1),
+  ('colibri','Colibrí',85000,95000,4,1,'compartida',1),
+  ('ecologica','Ecológica',120000,140000,8,3,'propia',1),
+  ('honeymoon','Honey Moon',120000,140000,8,3,'propia',1),
+  ('iglesia1','Iglesia 1',90000,110000,7,2,'compartida',1),
+  ('iglesia2','Iglesia 2',90000,110000,7,2,'compartida',1),
+  ('loica','Loica',100000,110000,6,2,'compartida',1),
+  ('monasterio','Monasterio',120000,140000,9,3,'propia',1),
+  ('naranjal1','Naranjal 1',85000,105000,4,2,'propia',1),
+  ('naranjal2','Naranjal 2',80000,100000,4,2,'propia',1),
+  ('organica1','Orgánica 1',90000,110000,7,2,'compartida',1),
+  ('organica2','Orgánica 2',90000,110000,7,2,'compartida',1),
+  ('patagua1','Patagua 1',90000,110000,7,5,'compartida',1),
+  ('patagua2','Patagua 2',90000,110000,6,2,'compartida',1),
+  ('quebracho','Quebracho',90000,110000,6,2,'compartida',1),
+  ('rapanui','Rapanui',110000,110000,6,2,'propia',1),
+  ('torcaza','Torcaza',100000,110000,6,3,'compartida',1),
+  ('voluntarios','Voluntarios',120000,140000,8,3,'propia',1);
