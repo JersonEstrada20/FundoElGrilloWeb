@@ -13,5 +13,11 @@
       "database_name": "fundo-el-grillo-db",
       "database_id": "PENDIENTE_CLOUDFLARE"
     }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "CABIN_IMAGES",
+      "bucket_name": "fundo-el-grillo-imagenes"
+    }
   ]
 }
