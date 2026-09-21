@@ -1,0 +1,13 @@
+(() => {
+  const get=async u=>{const r=await fetch(u);const d=await r.json();if(!r.ok)throw Error(d.error||'Error');return d};
+  const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const button=(label,id,status,type)=>'<button class="secondary" data-kind="'+type+'" data-id="'+id+'" data-status="'+status+'" style="width:auto;padding:8px 10px;margin:4px">'+label+'</button>';
+  async function loadOps(){
+    try{const me=await get('/api/me');if(!['owner','admin'].includes(me.staff.role))return;document.getElementById('operations').hidden=false;
+      const bookings=await get('/api/bookings');document.getElementById('bookingList').innerHTML=bookings.bookings.map(b=>'<div class="guest"><b>'+esc(b.resource_name)+'</b> · '+esc(b.full_name)+'<br>'+esc(b.start_date)+' a '+esc(b.end_date)+' · '+esc(b.guests||'—')+' personas · '+esc(b.phone)+'<br><small>Estado: '+esc(b.status)+'</small><div>'+button('Confirmar',b.id,'confirmed','booking')+button('Cancelar',b.id,'cancelled','booking')+'</div></div>').join('')||'<p class="message">No hay solicitudes.</p>';
+      const reviews=await get('/api/reviews');document.getElementById('reviewList').innerHTML=reviews.reviews.filter(r=>r.status==='pending').map(r=>'<div class="guest"><b>'+esc(r.full_name)+'</b> · '+('★'.repeat(r.rating))+'<br>'+esc(r.comment)+'<div>'+button('Publicar',r.id,'approved','review')+button('Rechazar',r.id,'rejected','review')+'</div></div>').join('')||'<p class="message">No hay opiniones pendientes.</p>';
+      document.querySelectorAll('[data-kind]').forEach(x=>x.onclick=async()=>{await fetch('/api/'+x.dataset.kind+'s/'+x.dataset.id,{method:'PATCH',headers:{'content-type':'application/json'},body:JSON.stringify({status:x.dataset.status})});loadOps()});
+    }catch{}
+  }
+  loadOps();
+})();
